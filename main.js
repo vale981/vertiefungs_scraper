@@ -38,6 +38,11 @@ async function renderTable() {
             checked_subj.add(subj.value);
 
     types = $('#type').val();
+    if(types.length === 0)
+        types = ['tut', 'lect'];
+
+    console.log( types.lenght );
+
     week  = $('#week').val();
 
     allsub = [];
@@ -63,11 +68,8 @@ async function renderTable() {
         last_day = 0;
         weekday_subs = Array.from({length: 5}, (x, i) => []);
         for(let sub of subs[time].docs) {
-            console.log( sub, sub.day );
-
             weekday_subs[sub.day].push(sub);
         }
-        console.log(weekday_subs);
 
         for (let day of weekday_subs) {
             content += `<td class="${day.length > 1 ? "red" : ""}">`;
