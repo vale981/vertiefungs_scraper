@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Physik Vertiefungsbrowser</title>
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/pouchdb@7.2.1/dist/pouchdb.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/pouchdb@7.2.1/dist/pouchdb.find.min.js"></script>
+        <script src="main.js"></script>
+        <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+
+        <style>
+         table {
+             max-height: none !important;
+         }
+         th, td {
+             border: 1px solid black;
+             overflow: show;
+         }
+
+         .red {
+             background-color: red;
+         }
+        </style>
+    </head>
+    <body>
+        <header>
+            <a href="#" class="logo">Hiro's Vertiefungsbrowser</a>
+        </header>
+        <div class="row">
+        <div class="col-sm-3">
+            <form id="settings">
+                <label for="type">Typ:</label>
+                <select id="type" name="type" multiple>
+                    <option value="tut" default>Uebung</option>
+                    <option value="lect" default>Vorlesung</option>
+                </select>
+                <label for="week">Woche:</label>
+                <select id="week" name="week">
+                    <option value="ugw" default>ugW.</option>
+                    <option value="gw">gW.</option>
+                </select>
+                <div id="verts"></div>
+            </form>
+        </div>
+            <div class="col-sm-9" id="table">
+                Einfach Links auswaehlen :).
+            </div>
+        </div>
+
+        <footer>
+            <p>Von Valentin Boettcher, <a href="//protagon.space">Website</a></p>
+        </footer>
+    </body>
+</html>
