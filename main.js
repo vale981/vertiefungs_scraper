@@ -14,6 +14,7 @@ function setUpForm() {
         $('#verts').append(`
          <h4>${vert}</h4>
         `);
+
         for(let sub of subjects[vert].keys()) {
 
             $('#verts').append(`
@@ -40,8 +41,6 @@ async function renderTable() {
     types = $('#type').val();
     if(types.length === 0)
         types = ['tut', 'lect'];
-
-    console.log( types.lenght );
 
     week  = $('#week').val();
 
@@ -88,7 +87,10 @@ async function renderTable() {
 }
 
 $(document).ready(() => {
-    getEvents().then(events => {
+db.allDocs({include_docs: true}).then(({rows}) => {
+            return Promise.all(rows.map(row => db.remove(row.doc)));
+}).then(() =>
+    getEvents()).then(events => {
         allput=[];
         for(let event of events) {
             if(!subjects[event.vert_name])
