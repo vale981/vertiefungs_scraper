@@ -27,25 +27,23 @@ function setUpForm() {
     }
 
     $('#settings').on('click', '*', e => {
-        renderTable();
+        renderTable('ugw');
+        renderTable('gw');
     });
 }
 
-async function renderTable() {
-    tbl = $('#table');
-    checked_subj = new Set();
+async function renderTable(week) {
+    let tbl = $(`#table-${week}`);
+    let checked_subj = new Set();
     for(let subj of $('.subj'))
         if($(subj).prop('checked'))
             checked_subj.add(subj.value);
 
-    types = $('#type').val();
+    let types = $('#type').val();
     if(types.length === 0)
         types = ['tut', 'lect'];
 
-    week  = $('#week').val();
-
-    allsub = [];
-
+    let allsub = [];
 
     for(let time of Array.from({length: 7}, (x, i) => i + 1)) {
         allsub.push(db.find({
@@ -55,7 +53,7 @@ async function renderTable() {
 
     }
 
-    subs = await Promise.all(allsub);
+    let subs = await Promise.all(allsub);
 
     let content = `<table><tr><th>DS</th>`;
     for(let day of ["Mo", "Di", "Mi", "Do", "Fr"])
@@ -64,8 +62,8 @@ async function renderTable() {
 
     for(let time in subs) {
         content += `<tr><td>${parseInt(time) + 1}`;
-        last_day = 0;
-        weekday_subs = Array.from({length: 5}, (x, i) => []);
+        let last_day = 0;
+        let weekday_subs = Array.from({length: 5}, (x, i) => []);
         for(let sub of subs[time].docs) {
             weekday_subs[sub.day].push(sub);
         }
